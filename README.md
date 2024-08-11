@@ -29,8 +29,42 @@ To learn more about Next.js, take a look at the following resources:
 
 You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
 
-## Deploy on Vercel
+## Schedule
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+7/29
+黒須：
+UI→動画を再生する
+Back→outputsと連携（DB）
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+小畑さん：
+動画処理→縦長/横長を切り分け対応
+動画処理→精度確認
+
+
+8/5
+黒須：
+Back→アップロード周りの処理（Fastapiとの連携）
+UI→アップロードUIの作成およびデプロイ
+フロント→入力画面(動画/まとめる枚数、キーワード)
+
+小畑さん：
+動画処理→縦長/横長を切り分け対応
+動画処理→精度確認
+API→調整（インプットのワードと枚数）
+
+
+8/12
+壁打ちしたい・・・
+黒須：
+UI周りの調整とエラー対応
+
+小畑さん：
+
+
+
+8/19
+
+
+8/21　仮：Step3-2 7th 発表会
+
+

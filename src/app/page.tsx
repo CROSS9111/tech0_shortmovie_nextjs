@@ -1,113 +1,105 @@
+"use client"
+
 import Image from "next/image";
+import { useRef, useState, useEffect } from 'react';
+import MovieGallery from "../../components/MovieGallery";
+import Header from '../../components/layouts/Header/Header';
+
+interface ImageData {
+  id: number;
+  pageURL: string;
+  largeImageURL: string;
+  date: string;
+}
 
 export default function Home() {
-  return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">src/app/page.tsx</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:size-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
+    const [fetchData, setFetchData] = useState<ImageData[]>([]);
+    const [selectedImage, setSelectedImage] = useState<number | null>(null); // モーダルで表示する選択された画像の状態を管理するためのステートを追加
+
+    const ref = useRef<HTMLInputElement>(null);
+
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+
+        if (ref.current) {
+            const endpointURL = `https://pixabay.com/api/?key=${process.env.NEXT_PUBLIC_PAXABAY_API}=${ref.current.value}&image_type=photo`;
+            console.log(process.env.NEXT_PUBLIC_PAXABAY_API)
+
+            fetch(endpointURL).then((res) => {
+                return res.json();
+            })
+            .then((data) => {
+                const formattedData = data.hits.map((item: any) => ({
+                    id: item.id,
+                    pageURL: item.pageURL,
+                    largeImageURL: item.largeImageURL,
+                    date: new Date().toLocaleDateString()
+                }));
+                setFetchData(formattedData);
+            });
+        }
+    };
+
+    const [searchword, setSearchword] = useState(0);
+    useEffect(() => {
+        if (fetchData.length > 0) {
+            let count = searchword;
+            count++;
+            setSearchword(count);
+        }
+    }, [fetchData]);
+
+    return (
+        <div>
+            <Header />
+            <div className="container mx-auto text-center">
+                <p>{searchword}</p>
+                <form onSubmit={(e) => handleSubmit(e)} className="mb-4">
+                    <input 
+                        type="text" 
+                        placeholder='画像を探す' 
+                        ref={ref} 
+                        className="border rounded px-4 py-2 w-2/3 md:w-1/2 lg:w-1/3"
+                    />
+                </form>
+
+                <MovieGallery fetchData={fetchData} setSelectedImage={setSelectedImage}/>
+
+                {/* selectedImageがnullでない場合にモーダルを表示 */}
+                {selectedImage !== null && (
+                    <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50">
+                        <button 
+                            className="absolute top-0 right-0 p-4 text-white"
+                            onClick={() => setSelectedImage(null)} // ×ボタンでモーダルを閉じる
+                        >
+                            ×
+                        </button>
+                        <button 
+                            className="absolute left-4 text-white text-3xl"
+                            onClick={() => setSelectedImage(selectedImage > 0 ? selectedImage - 1 : fetchData.length - 1)} // 左矢印で前の画像に移動
+                        >
+                            ←
+                        </button>
+                        <button 
+                            className="absolute right-4 text-white text-3xl"
+                            onClick={() => setSelectedImage((selectedImage + 1) % fetchData.length)} // 右矢印で次の画像に移動
+                        >
+                            →
+                        </button>
+                        <img src={fetchData[selectedImage].largeImageURL} alt="" className="max-w-full max-h-full"/> {/* モーダル内で画像を表示 */}
+                        <video controls preload="none" style={{ width: '100%', maxWidth: '640px' }}>
+                        <source src="video.mp4" type="video/mp4" />
+                        <track
+                          src="/path/to/captions.vtt"
+                          kind="subtitles"
+                          srcLang="en"
+                          label="English"
+                        />
+                        Your browser does not support the video tag.
+                        </video>
+                    </div>
+                )}
+            </div>
         </div>
-      </div>
-
-      <div className="relative z-[-1] flex place-items-center before:absolute before:h-[300px] before:w-full before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-full after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 sm:before:w-[480px] sm:after:w-[240px] before:lg:h-[360px]">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className="mb-32 grid text-center lg:mb-0 lg:w-full lg:max-w-5xl lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Docs{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-sm opacity-50">
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Learn{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-sm opacity-50">
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Templates{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-sm opacity-50">
-            Explore starter templates for Next.js.
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Deploy{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-balance text-sm opacity-50">
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
-  );
+    );
 }
