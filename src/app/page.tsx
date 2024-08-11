@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useRef, useState, useEffect } from 'react';
 import MovieGallery from "../../components/MovieGallery";
 import Header from '../../components/layouts/Header/Header';
+import Topview from "../../components/elements/Topview/Topview";
 
 interface ImageData {
   id: number;
@@ -18,12 +19,15 @@ export default function Home() {
 
     const ref = useRef<HTMLInputElement>(null);
 
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
         if (ref.current) {
             const endpointURL = `https://pixabay.com/api/?key=${process.env.NEXT_PUBLIC_PAXABAY_API}=${ref.current.value}&image_type=photo`;
-            console.log(process.env.NEXT_PUBLIC_PAXABAY_API)
+            
+            const testresponse = await fetch("api/v1/getoutputs")
+            const data = await testresponse.json();
+            console.log("API response:", data);
 
             fetch(endpointURL).then((res) => {
                 return res.json();
@@ -52,7 +56,8 @@ export default function Home() {
     return (
         <div>
             <Header />
-            <div className="container mx-auto text-center">
+
+            <div className="container mx-auto text-center mt-[80px]">
                 <p>{searchword}</p>
                 <form onSubmit={(e) => handleSubmit(e)} className="mb-4">
                     <input 
@@ -62,6 +67,7 @@ export default function Home() {
                         className="border rounded px-4 py-2 w-2/3 md:w-1/2 lg:w-1/3"
                     />
                 </form>
+                <Topview />
 
                 <MovieGallery fetchData={fetchData} setSelectedImage={setSelectedImage}/>
 

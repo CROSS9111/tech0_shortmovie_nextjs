@@ -11,26 +11,28 @@ const Header = () => {
   };
 
   return (
-    <div>
-      <header className="bg-pink-200 p-4 mx-4 my-2 rounded-xl flex justify-between items-center relative">
-        <div className="text-lg font-bold text-center w-full">SHORT MOVIE by tech0</div>
-        <div className="absolute right-4">
-          <button className="p-2 hover:bg-pink-300 rounded" onClick={toggleSidebar}>
-            <svg
-              className="w-6 h-6"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M4 6h16M4 12h16M4 18h16"
-              ></path>
-            </svg>
-          </button>
+    <div  className="relative z-50">
+      <header className="fixed top-0 left-0 right-0 bg-white shadow-md z-10">
+        <div className="container mx-auto px-4">
+          <div className="flex justify-between items-center h-16">
+            <div className="text-lg font-bold">SHORT MOVIE by tech0</div>
+            <button className="p-2 hover:bg-gray-100 rounded" onClick={toggleSidebar}>
+              <svg
+                className="w-6 h-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M4 6h16M4 12h16M4 18h16"
+                ></path>
+              </svg>
+            </button>
+          </div>
         </div>
       </header>
 
