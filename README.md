@@ -31,40 +31,15 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 
 ## Schedule
 
-7/29
-黒須：
-UI→動画を再生する
-Back→outputsと連携（DB）
-
-小畑さん：
-動画処理→縦長/横長を切り分け対応
-動画処理→精度確認
 
 
-8/5
-黒須：
-Back→アップロード周りの処理（Fastapiとの連携）
-UI→アップロードUIの作成およびデプロイ
-フロント→入力画面(動画/まとめる枚数、キーワード)
+zod:型検証
 
-小畑さん：
-動画処理→縦長/横長を切り分け対応
-動画処理→精度確認
-API→調整（インプットのワードと枚数）
+8/17 auth.jsうまくいかなかったので
+https://zenn.dev/tsuboi/books/3f7a3056014458/viewer/chapter2
+https://zenn.dev/hid3/articles/369179cd48c918
 
-
-8/12
-壁打ちしたい・・・
-黒須：
-UI周りの調整とエラー対応
-
-小畑さん：
-
-
-
-8/19
-
-
-8/21　仮：Step3-2 7th 発表会
-
-
+msal
+https://zenn.dev/microsoft/articles/20231107_node_msal
+CSRFトークン不要せつ
+https://qiita.com/silane1001/items/2adba867f2c4e60ca8e5
