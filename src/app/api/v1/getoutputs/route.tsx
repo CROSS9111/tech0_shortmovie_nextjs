@@ -41,11 +41,14 @@ export async function GET() {
 
     return NextResponse.json({ blobs });
   } catch (err: unknown){
-      if (err instanceof Error) {
-          console.error(`Error: ${err.message}`);
-      } else {
-          console.error('An unknown error occurred');
-      }}
+    if (err instanceof Error) {
+      console.error(`Error: ${err.message}`);
+      return NextResponse.json({ error: err.message }, { status: 500 });
+    } else {
+      console.error('An unknown error occurred');
+      return NextResponse.json({ error: 'An unknown error occurred' }, { status: 500 });
+    }
+    }
 
   // try {
 
