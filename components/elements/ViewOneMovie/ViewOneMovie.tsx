@@ -1,17 +1,26 @@
-// ストリーミング用コード
-import { Suspense } from 'react'
-import { list } from '@vercel/blob'
-
-
 export default function ViewOneMovie() {
     console.log("clients")
     return (
         <>test</>
-    // <Suspense fallback={<p>Loading video...</p>}>
-    //     <VideoComponent fileName="my-video.mp4" />
-    // </Suspense>
     )
 }
+
+
+//以下が正式なコード
+
+// // ストリーミング用コード
+// import { Suspense } from 'react'
+// import { list } from '@vercel/blob'
+
+
+// export default function ViewOneMovie() {
+//     console.log("clients")
+//     return (
+//     <Suspense fallback={<p>Loading video...</p>}>
+//         <VideoComponent fileName="my-video.mp4" />
+//     </Suspense>
+//     )
+// }
 
 // async function VideoComponent({ fileName }: { fileName: string }) {
 //     const { blobs } = await list({
