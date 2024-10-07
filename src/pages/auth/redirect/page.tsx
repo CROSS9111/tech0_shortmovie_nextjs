@@ -9,13 +9,11 @@ export default function Home() {
   const [state, setState] = useState({
     jwt: "",
   })
-  // const [code, _] = useState(params.get("code"))
-  const [code, _] = useState(params ? params.get("code") : null);
-
+//   const [code, _] = useState(params.get("code"))
+const [code, _] = useState(params ? params.get("code") : null);
 
   useEffect(() => {
     if (!code) return; // codeがnullの場合はリクエストを行わない
-
     (async() => {
       // 認証をかける
       const url = "/api/auth/verify"
@@ -28,6 +26,17 @@ export default function Home() {
 
   return (
     <div>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+
       {state.jwt}
     </div>
   )

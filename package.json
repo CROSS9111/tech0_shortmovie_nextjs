@@ -11,7 +11,7 @@
   "dependencies": {
     "@azure/identity": "^4.4.1",
     "@azure/msal-node": "^2.14.0",
-    "@azure/storage-blob": "^12.24.0",
+    "@azure/storage-blob": "^12.25.0",
     "@vercel/blob": "^0.23.4",
     "axios": "^1.7.7",
     "dotenv": "^16.4.5",
@@ -26,6 +26,7 @@
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "@types/uuid": "^10.0.0",
     "eslint": "^8",
     "eslint-config-next": "14.2.5",
     "postcss": "^8",

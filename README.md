@@ -43,3 +43,5 @@ msal
 https://zenn.dev/microsoft/articles/20231107_node_msal
 CSRFトークン不要せつ
 https://qiita.com/silane1001/items/2adba867f2c4e60ca8e5
+
+https://pote-chil.com/posts/nextjs-security-headers

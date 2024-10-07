@@ -1,4 +1,6 @@
-import { AuthenticationResult, ConfidentialClientApplication, Configuration, CryptoProvider, LogLevel } from "@azure/msal-node"
+// import { AuthenticationResult, ConfidentialClientApplication, Configuration, CryptoProvider, LogLevel } from "@azure/msal-node"
+import { AuthenticationResult, ConfidentialClientApplication, Configuration, CryptoProvider, LogLevel, SilentFlowRequest, AccountInfo, RefreshTokenRequest  } from "@azure/msal-node";
+
 
 export class MsalService {
   private _config: Configuration = {
@@ -18,6 +20,8 @@ export class MsalService {
   private _msalInstance: ConfidentialClientApplication = new ConfidentialClientApplication(this._config)
   private _msalCryptProvider: CryptoProvider = new CryptoProvider()
   private _REDIRECT_URI: string = process.env.REDIRECT_URI ?? ""
+  private _SCOPE: string[] = [(process.env.SCOPE ?? ""), "offline_access", "user.read","openid","profile"];
+
 
   // 認証用のコードを発行する
   public getCryptoCodeVerifier = async(): Promise<{verifier: string, challenge: string, state: string}> => {
@@ -55,4 +59,34 @@ export class MsalService {
       scopes: scopes ?? [],
     })
   }
+
+  public acquireTokenSilent = async(account: AccountInfo, scopes?: string[]): Promise<AuthenticationResult> => {
+    const silentRequest: SilentFlowRequest = {
+        account: account,
+        scopes: scopes ?? this._SCOPE,
+    };
+    return await this._msalInstance.acquireTokenSilent(silentRequest);
+}
+
+public getRefreshToken = () => {
+    const tokenCache = this._msalInstance.getTokenCache().serialize();
+    const refreshTokenObject = JSON.parse(tokenCache).RefreshToken;
+    // console.log("tokenCache : ",tokenCache);
+    const refreshToken = refreshTokenObject[Object.keys(refreshTokenObject)[0]].secret;
+    // console.log("RefreshToken :",refreshToken);
+    return refreshToken;
+};
+
+// リフレッシュトークンを使用して新しいアクセストークンを取得する
+public acquireTokenByRefreshToken = async(refreshToken: string, scopes?: string[]): Promise<AuthenticationResult> => {
+    const refreshTokenRequest: RefreshTokenRequest = {
+        refreshToken: refreshToken,
+        scopes: scopes ?? this._SCOPE,
+    };
+    const result = await this._msalInstance.acquireTokenByRefreshToken(refreshTokenRequest);
+    if (result) {
+        return result;
+    }
+    throw new Error("Failed to acquire token by refresh token.");
+}
 }
