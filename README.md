@@ -39,9 +39,17 @@ zod:型検証
 https://zenn.dev/tsuboi/books/3f7a3056014458/viewer/chapter2
 https://zenn.dev/hid3/articles/369179cd48c918
 
-msal
+msal認証のベース記事：
 https://zenn.dev/microsoft/articles/20231107_node_msal
+Github actions、
+
+
 CSRFトークン不要せつ
 https://qiita.com/silane1001/items/2adba867f2c4e60ca8e5
 
 https://pote-chil.com/posts/nextjs-security-headers
+
+本番環境デプロイ用の設定
+module.exports = {
+  output: 'standalone',
+}
