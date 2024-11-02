@@ -156,6 +156,8 @@ export default function Home() {
   // console.log("port",port)
   const NODE = process.env.NODE_ENV;
   console.log("NODE",NODE)
+  const BBBB = process.env.REDIRECT_URI
+  console.log("BBBB",BBBB)
 
 
 
