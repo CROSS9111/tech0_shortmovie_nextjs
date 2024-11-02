@@ -46,6 +46,7 @@
 
 
 import React from 'react';
+import Image from 'next/image'
 
 interface ImageData {
     id: number;
@@ -74,7 +75,7 @@ const MovieGallery: React.FC<MovieGalleryProps> = ({ fetchData, setSelectedImage
                                 setSelectedImage(index); // クリックした画像のインデックスをセット
                             }}
                         >
-                            <img 
+                            <Image 
                                 src={data.largeImageURL} 
                                 alt='' 
                                 className='w-full h-full rounded-md object-cover shadow-md cursor-pointer transition-all hover:shadow-none hover:transform hover:translate-y-1 duration-300'
