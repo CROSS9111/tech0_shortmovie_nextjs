@@ -2,7 +2,6 @@
 import { useRouter } from 'next/navigation'
 import { useEffect } from 'react'
 import Space from "@/components/elements/Space/Space";
-import { useSearchParams } from "next/navigation"
 
 
 
