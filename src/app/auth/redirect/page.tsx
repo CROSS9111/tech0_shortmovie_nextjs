@@ -2,7 +2,7 @@
 import { AuthenticationResult } from "@azure/msal-node"
 import axios from "axios"
 import { useSearchParams } from "next/navigation"
-import { useEffect, useState } from "react"
+import { useEffect, useState, Suspense } from "react"
 
 export default function Home() {
   const params = useSearchParams()
@@ -27,8 +27,10 @@ export default function Home() {
   }, [code])
 
   return (
+    <Suspense fallback={<div>Loading...</div>}>
     <div>
       {state.jwt}
     </div>
+    </Suspense>
   )
 }
