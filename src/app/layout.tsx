@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Suspense } from 'react'
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Header from "../../components/layouts/Header/Header";
@@ -19,7 +20,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
+        <Suspense>
         <Header />
+        </Suspense>
         {/* <AuthProvider> */}
         {children}
         {/* </AuthProvider> */}
