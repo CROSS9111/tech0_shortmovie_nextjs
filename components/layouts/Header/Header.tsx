@@ -127,7 +127,8 @@ const Header = () => {
               </Link>
             </nav>
             <div className="flex items-center space-x-4">
-              <button onClick={() => signin()} className="hidden md:block px-4 py-2 bg-white border border-gray-300 rounded-full hover:bg-gray-100">
+              {/* <button onClick={() => signin()} className="hidden md:block px-4 py-2 bg-white border border-gray-300 rounded-full hover:bg-gray-100"> */}
+              <button className="hidden md:block px-4 py-2 bg-white border border-gray-300 rounded-full hover:bg-gray-100">
                 Get Started
               </button>
               {/* <button className="p-2 hover:bg-gray-100 rounded md:hidden" onClick={toggleSidebar}>
