@@ -32,7 +32,6 @@ export default function SigninPage({ params }: { params: { from: string } }) {
   }, [from, router])
 
   return (
-    <Suspense fallback={<div>Loading...</div>}>
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
       <Space />
     <div className="bg-white p-8 rounded-lg shadow-lg">
@@ -57,6 +56,5 @@ export default function SigninPage({ params }: { params: { from: string } }) {
         </div>
     </div>
 </div>
-</Suspense>
     )
 }
