@@ -44,7 +44,7 @@ jobs:
           CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
           TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
           CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
-          CLOUD_INSTANCE: ${{ secrets.CLOUD_INSTANCE }}
+          CLOUD_INSTANCE: ${{ secrets.AZURE_CLOUD_INSTANCE }}
           REDIRECT_URI: ${{ secrets.REDIRECT_URI }}
         run: |
           npm install
