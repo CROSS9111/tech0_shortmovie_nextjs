@@ -42,12 +42,12 @@ import { useSearchParams } from "next/navigation";
 import { useEffect, useState, Suspense } from "react";
 
 export default function Home() {
-  const params = useSearchParams();
   const [state, setState] = useState({
     jwt: "",
   });
 
   useEffect(() => {
+    const params = useSearchParams();
     const code = params ? params.get("code") : null;
     if (!code) return; // codeがnullの場合はリクエストを行わない
 
@@ -62,13 +62,11 @@ export default function Home() {
         console.error("Error during authentication", error);
       }
     })();
-  }, [params]);
+  }, []); // 依存配列を空にして初回のみ実行
 
   return (
-    <Suspense fallback={<div>Loading...</div>}>
       <div>
         {state.jwt ? <div>JWT: {state.jwt}</div> : <div>Authenticating...</div>}
       </div>
-    </Suspense>
   );
 }
