@@ -1,6 +1,6 @@
 // import { AuthenticationResult, ConfidentialClientApplication, Configuration, CryptoProvider, LogLevel } from "@azure/msal-node"
 import { AuthenticationResult, ConfidentialClientApplication, Configuration, CryptoProvider, LogLevel, SilentFlowRequest, AccountInfo, RefreshTokenRequest  } from "@azure/msal-node";
-
+export const dynamic = 'force-dynamic'
 
 export class MsalService {
   private _config: Configuration = {

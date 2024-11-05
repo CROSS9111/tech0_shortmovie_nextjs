@@ -153,7 +153,8 @@
 // console.log("port",port)
 import Image from "next/image";
 
-// 
+// https://qiita.com/suzuk12345/items/bbaf82bbf28997c9adab
+// https://zenn.dev/minato86/articles/138b4604044b9f
 export const dynamic = 'force-dynamic'
 
 export default function Home() {
