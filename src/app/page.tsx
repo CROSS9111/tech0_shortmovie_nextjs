@@ -147,19 +147,17 @@
 //     );
 // }
 
+
+// Nextjsはデフォルトでport3000を指定している
+// const port = process.env.PORT;
+// console.log("port",port)
 import Image from "next/image";
-// import { useAuth } from "./context/AuthContext";
 
 export default function Home() {
-  // Nextjsはデフォルトでport3000を指定している
-  // const port = process.env.PORT;
-  // console.log("port",port)
   const NODE = process.env.NODE_ENV;
   console.log("NODE",NODE)
   const BBBB = process.env.REDIRECT_URI
   console.log("BBBB",BBBB)
-
-
 
     return (
       <div className="relative pt-20"> {/* ヘッダー分のスペースを追加 */}

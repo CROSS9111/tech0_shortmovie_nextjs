@@ -25,6 +25,9 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '20.x'
+      - name: Create .env file
+        run: |
+          echo "REDIRECT_URI=${{ secrets.REDIRECT_URI }}" >> .env
       
       # 確認用
       - name: 'Az CLI login'
