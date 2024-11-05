@@ -173,6 +173,7 @@ export default function Home() {
           />
         <div className="absolute inset-0 flex items-start justify-center top-10">
         <h1 className="text-white text-4xl font-bold">Memories will always be with you.</h1>
+        {BBBB}testtest
         </div>
         </div>
       </div>
