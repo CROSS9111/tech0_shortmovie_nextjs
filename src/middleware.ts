@@ -33,7 +33,7 @@ import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 
 // 認証が不要なパスのリスト
-const publicPaths = ['/api/auth/signin', '/signin', '/api/auth/verify']
+const publicPaths = ['/api/auth/signin', '/signin', '/api/auth/verify','/upload','/generated']
 
 // This function can be marked `async` if using `await` inside
 export function middleware(request: NextRequest) {

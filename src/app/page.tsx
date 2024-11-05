@@ -153,6 +153,10 @@
 // console.log("port",port)
 import Image from "next/image";
 
+// export const dynamic = 'force-dynamic'に関して
+// 公式
+// https://nextjs.org/docs/app/api-reference/file-conventions/route-segment-config
+// 参考記事
 // https://qiita.com/suzuk12345/items/bbaf82bbf28997c9adab
 // https://zenn.dev/minato86/articles/138b4604044b9f
 export const dynamic = 'force-dynamic'
