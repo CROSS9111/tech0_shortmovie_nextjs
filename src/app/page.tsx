@@ -153,6 +153,9 @@
 // console.log("port",port)
 import Image from "next/image";
 
+// 
+export const dynamic = 'force-dynamic'
+
 export default function Home() {
   const NODE = process.env.NODE_ENV;
   console.log("NODE",NODE)
